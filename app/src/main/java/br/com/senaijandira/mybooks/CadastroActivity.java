@@ -76,31 +76,38 @@ public class CadastroActivity extends AppCompatActivity {
 
     public void salvarLivro(View view) {
 
-        byte[] capa = Utils.toByteArray(livroCapa);
+        if (livroCapa == null){
 
-        String titulo = txtTitulo.getText().toString();
+            alert("Erro", "Selecione uma imagem", 1);
 
-        String descricao = txtDescricao.getText().toString();
+        } else {
 
-       if (titulo.equals("") || descricao.equals("")){
+            byte[] capa = Utils.toByteArray(livroCapa);
 
-           alert("Erro", "Houve um erro ao tentar cadastrar o livro.", 1);
+            String titulo = txtTitulo.getText().toString();
 
-       } else {
+            String descricao = txtDescricao.getText().toString();
 
-           alert("Livro cadastrado", "Livro cadastrado com sucesso!", 0);
+            if (titulo.equals("") || descricao.equals("")) {
 
-           Livro livro = new Livro(0, capa, titulo, descricao);
+                alert("Erro", "Preencha todos os campos", 1);
 
-           // Inserir na variável estática da MAinActivity
+            } else {
 
-           int tamanhoArray = MainActivity.livros.length;
+                alert("Livro cadastrado", "Livro cadastrado com sucesso!", 0);
 
-           MainActivity.livros = Arrays.copyOf(MainActivity.livros, tamanhoArray+1);
+                Livro livro = new Livro(0, capa, titulo, descricao);
 
-           MainActivity.livros[tamanhoArray] = livro;
+                // Inserir na variável estática da MainActivity
+                int tamanhoArray = MainActivity.livros.length;
 
-       }
+                MainActivity.livros = Arrays.copyOf(MainActivity.livros, tamanhoArray + 1);
+
+                MainActivity.livros[tamanhoArray] = livro;
+
+            }
+
+        }
 
     }
 
