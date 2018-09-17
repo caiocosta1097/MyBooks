@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">My Books</string>
+
+    <string name="pequeno_principe">
+        O autor do livro é o personagem principal da história,
+        que assume também o papel de narrador, contando sobre o
+        fatídico dia em que seu avião teria caído no meio do deserto
+        do Saara.
+    </string>
+
+    <string name="cinquenta_tons">
+        Quando Anastasia Steele entrevista o jovem empresário Christian Grey,
+        descobre nele um homem atraente, brilhante e profundamente dominador.
+        Ingênua e inocente.
+    </string>
+
+    <string name="kotlin_android">
+        A linguagem Kotlin vem ganhando cada vez mais destaque no cenário do desenvolvimento
+        de aplicativos. Projetada para ter uma interoperabilidade
+        total com código Java.
+    </string>
+
+</resources>
