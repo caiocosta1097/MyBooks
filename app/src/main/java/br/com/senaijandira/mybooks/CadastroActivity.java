@@ -2,20 +2,20 @@ package br.com.senaijandira.mybooks;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.arch.persistence.room.Room;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import java.io.InputStream;
-import java.lang.reflect.Array;
-import java.util.Arrays;
 
+import br.com.senaijandira.mybooks.db.MyBooksDatabase;
 import br.com.senaijandira.mybooks.model.Livro;
 
 public class CadastroActivity extends AppCompatActivity {
@@ -29,10 +29,18 @@ public class CadastroActivity extends AppCompatActivity {
 
     private final int COD_REQ_GALERIA = 101;
 
+    private MyBooksDatabase myBooksDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
+
+        // Criando a instância do banco de dados
+        myBooksDatabase = Room.databaseBuilder(getApplicationContext(), MyBooksDatabase.class, Utils.DATABASE_NAME)
+                .fallbackToDestructiveMigration()
+                .allowMainThreadQueries()
+                .build();
 
         imgLivroCapa = findViewById(R.id.imgLivroCapa);
         txtTitulo = findViewById(R.id.txtTitulo);
@@ -94,16 +102,19 @@ public class CadastroActivity extends AppCompatActivity {
 
             } else {
 
-                alert("Livro cadastrado", "Livro cadastrado com sucesso!", 0);
+                alert("Sucesso", "Livro cadastrado com sucesso!", 0);
 
                 Livro livro = new Livro(0, capa, titulo, descricao);
 
                 // Inserir na variável estática da MainActivity
-                int tamanhoArray = MainActivity.livros.length;
+//                int tamanhoArray = MainActivity.livros.length;
+//
+//                MainActivity.livros = Arrays.copyOf(MainActivity.livros, tamanhoArray + 1);
+//
+//                MainActivity.livros[tamanhoArray] = livro;
 
-                MainActivity.livros = Arrays.copyOf(MainActivity.livros, tamanhoArray + 1);
-
-                MainActivity.livros[tamanhoArray] = livro;
+                // Inserir no banco dados
+                myBooksDatabase.livroDao().inserir(livro);
 
             }
 
