@@ -71,12 +71,14 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/livros_ler"/>
+                    android:src="@drawable/livros_ler"
+                    android:id="@+id/imgLivrosLer"/>
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/livros_lidos"/>
+                    android:src="@drawable/livros_lidos"
+                    android:id="@+id/imgLivrosLidos"/>
 
             </LinearLayout>
 

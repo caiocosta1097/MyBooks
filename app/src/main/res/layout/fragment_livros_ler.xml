@@ -5,12 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/text2"
-        android:layout_gravity="center"
-        android:textAlignment="center"
-        android:textSize="30sp"/>
+        android:id="@+id/listViewLivros">
+
+    </ListView>
 
 </LinearLayout>

@@ -96,6 +96,8 @@ public class CadastroActivity extends AppCompatActivity {
 
             String descricao = txtDescricao.getText().toString();
 
+            int status = 0;
+
             if (titulo.equals("") || descricao.equals("")) {
 
                 alert("Erro", "Preencha todos os campos", 1);
@@ -104,7 +106,7 @@ public class CadastroActivity extends AppCompatActivity {
 
                 alert("Sucesso", "Livro cadastrado com sucesso!", 0);
 
-                Livro livro = new Livro(0, capa, titulo, descricao);
+                Livro livro = new Livro(0, capa, titulo, descricao, status);
 
                 myBooksDatabase.livroDao().inserir(livro);
 

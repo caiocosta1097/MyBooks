@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-
 import br.com.senaijandira.mybooks.LivrosAdapter;
 import br.com.senaijandira.mybooks.R;
 import br.com.senaijandira.mybooks.Utils;
@@ -21,6 +20,7 @@ public class LivrosFragment extends Fragment {
     LivrosAdapter adapter;
 
     MyBooksDatabase appDB;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,4 +53,5 @@ public class LivrosFragment extends Fragment {
         adapter.addAll(livros);
 
     }
+
 }

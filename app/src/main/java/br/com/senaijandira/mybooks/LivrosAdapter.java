@@ -1,9 +1,11 @@
 package br.com.senaijandira.mybooks;
 
-import android.app.Activity;
+
 import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.Intent;
+
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -21,6 +23,12 @@ import br.com.senaijandira.mybooks.model.Livro;
 public class LivrosAdapter extends ArrayAdapter<Livro> {
 
     MyBooksDatabase appDB;
+
+    ImageView imgLivroLer;
+    ImageView imgLivroLido;
+
+    Drawable drawableLer;
+    Drawable drawableLido;
 
     public LivrosAdapter(Context context){
 
@@ -77,6 +85,74 @@ public class LivrosAdapter extends ArrayAdapter<Livro> {
 
             }
         });
+
+        imgLivroLer = view.findViewById(R.id.imgLivrosLer);
+
+        if (livro.getStatus() == 1){
+
+            drawableLer = getContext().getResources().getDrawable(R.drawable.livros_ler_click);
+
+            imgLivroLer.setImageDrawable(drawableLer);
+
+        } else {
+
+            drawableLer = getContext().getResources().getDrawable(R.drawable.livros_ler);
+
+            imgLivroLer.setImageDrawable(drawableLer);
+
+        }
+
+        imgLivroLer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+               Livro livroLer = new Livro(livro.getId(), livro.getCapa(), livro.getTitulo(), livro.getDescricao(), 1);
+
+               appDB.livroDao().atualizar(livroLer);
+
+               clear();
+
+               Livro[] livros = appDB.livroDao().selecionarTodos();
+
+               addAll(livros);
+
+            }
+        });
+
+
+        imgLivroLido = view.findViewById(R.id.imgLivrosLidos);
+
+        if (livro.getStatus() == 2){
+
+            drawableLido = getContext().getResources().getDrawable(R.drawable.livros_lidos_click);
+
+            imgLivroLido.setImageDrawable(drawableLido);
+
+        } else {
+
+            drawableLido = getContext().getResources().getDrawable(R.drawable.livros_lidos);
+
+            imgLivroLido.setImageDrawable(drawableLido);
+
+        }
+
+        imgLivroLido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Livro livroLido = new Livro(livro.getId(), livro.getCapa(), livro.getTitulo(), livro.getDescricao(), 2);
+
+                appDB.livroDao().atualizar(livroLido);
+
+                clear();
+
+                Livro[] livros = appDB.livroDao().selecionarTodos();
+
+                addAll(livros);
+
+            }
+        });
+
 
         imgLivroCapa.setImageBitmap(Utils.toBitmap(livro.getCapa()));
 

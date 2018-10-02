@@ -21,10 +21,15 @@ import br.com.senaijandira.mybooks.model.Livro;
 public class EditarLivro extends AppCompatActivity {
 
     Bitmap livroCapa;
+
     ImageView imgLivroCapa;
+
     EditText txtTitulo, txtDescricao;
+
     AlertDialog alerta;
-    int idLivro;
+
+    int idLivro, status;
+
     InputStream input;
 
     private final int COD_REQ_GALERIA = 101;
@@ -54,7 +59,10 @@ public class EditarLivro extends AppCompatActivity {
         imgLivroCapa.setImageBitmap(Utils.toBitmap(livro.getCapa()));
         livroCapa = BitmapFactory.decodeByteArray(livro.getCapa(), 0, livro.getCapa().length);
         txtTitulo.setText(livro.getTitulo());
-        txtDescricao.setText(livro.getDescricao());
+//        txtDescricao.setText(livro.getDescricao());
+        status = livro.getStatus();
+        txtDescricao.setText(String.valueOf(livro.getStatus()));
+
 
     }
 
@@ -113,9 +121,9 @@ public class EditarLivro extends AppCompatActivity {
 
             } else {
 
-                alert("Sucesso", "Livro cadastrado com sucesso!", 0);
+                alert("Sucesso", "Livro atualizado com sucesso!", 0);
 
-                Livro livro = new Livro(idLivro, capa, titulo, descricao);
+                Livro livro = new Livro(idLivro, capa, titulo, descricao, status);
 
                 myBooksDatabase.livroDao().atualizar(livro);
 
