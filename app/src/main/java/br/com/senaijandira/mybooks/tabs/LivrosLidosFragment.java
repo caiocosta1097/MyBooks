@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import br.com.senaijandira.mybooks.LivrosAdapter;
+import br.com.senaijandira.mybooks.LivrosLidosAdapter;
 import br.com.senaijandira.mybooks.R;
 import br.com.senaijandira.mybooks.Utils;
 import br.com.senaijandira.mybooks.db.MyBooksDatabase;
@@ -18,7 +19,7 @@ public class LivrosLidosFragment extends Fragment {
 
     ListView listViewLivros;
 
-    LivrosAdapter adapter;
+    LivrosLidosAdapter adapter;
 
     MyBooksDatabase appDB;
 
@@ -34,7 +35,7 @@ public class LivrosLidosFragment extends Fragment {
 
         listViewLivros = view.findViewById(R.id.listViewLivros);
 
-        adapter = new LivrosAdapter(getContext());
+        adapter = new LivrosLidosAdapter(getContext());
 
         listViewLivros.setAdapter(adapter);
 

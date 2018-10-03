@@ -20,14 +20,30 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         AbasAdapter adapter = new AbasAdapter(getSupportFragmentManager());
-        adapter.adicionar(new LivrosFragment(), "Livros");
-        adapter.adicionar(new LivrosLerFragment(), "Ler");
-        adapter.adicionar(new LivrosLidosFragment(), "Lidos");
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.abasViewPager);
+        final ViewPager viewPager = findViewById(R.id.abasViewPager);
         viewPager.setAdapter(adapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.abas);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+                viewPager.getAdapter().notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        TabLayout tabLayout = findViewById(R.id.abas);
         tabLayout.setupWithViewPager(viewPager);
 
     }

@@ -58,26 +58,14 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/delete"
+                    android:src="@drawable/remover"
                     android:id="@+id/imgDeleteLivro"/>
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/editar"
-                    android:id="@+id/imgEditarLivro"/>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/livros_ler_click"
+                    android:src="@drawable/livros_ler"
                     android:id="@+id/imgLivrosLer"/>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/livros_lidos_click"
-                    android:id="@+id/imgLivrosLidos" />
 
             </LinearLayout>
 

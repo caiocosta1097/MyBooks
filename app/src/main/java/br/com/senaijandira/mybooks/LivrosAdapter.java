@@ -1,8 +1,10 @@
 package br.com.senaijandira.mybooks;
 
 
+import android.app.AlertDialog;
 import android.arch.persistence.room.Room;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.graphics.drawable.Drawable;
@@ -29,6 +31,8 @@ public class LivrosAdapter extends ArrayAdapter<Livro> {
 
     Drawable drawableLer;
     Drawable drawableLido;
+
+    AlertDialog alerta;
 
     public LivrosAdapter(Context context){
 
@@ -65,9 +69,20 @@ public class LivrosAdapter extends ArrayAdapter<Livro> {
             @Override
             public void onClick(View v) {
 
-                appDB.livroDao().deletar(livro);
 
-                remove(livro);
+                if (livro.getStatus() == 1 || livro.getStatus() == 2){
+
+                    alert("Erro", "Não é possível excluir o livro enquanto estiver em outra lista");
+
+                } else {
+
+                    appDB.livroDao().deletar(livro);
+
+                    remove(livro);
+
+                    alert("Sucesso", "Livro excluído com sucesso!");
+
+                }
 
             }
         });
@@ -90,13 +105,13 @@ public class LivrosAdapter extends ArrayAdapter<Livro> {
 
         if (livro.getStatus() == 1){
 
-            drawableLer = getContext().getResources().getDrawable(R.drawable.livros_ler_click);
+            drawableLer = getContext().getResources().getDrawable(R.drawable.livros_ler);
 
             imgLivroLer.setImageDrawable(drawableLer);
 
         } else {
 
-            drawableLer = getContext().getResources().getDrawable(R.drawable.livros_ler);
+            drawableLer = getContext().getResources().getDrawable(R.drawable.livros_ler_click);
 
             imgLivroLer.setImageDrawable(drawableLer);
 
@@ -124,13 +139,13 @@ public class LivrosAdapter extends ArrayAdapter<Livro> {
 
         if (livro.getStatus() == 2){
 
-            drawableLido = getContext().getResources().getDrawable(R.drawable.livros_lidos_click);
+            drawableLido = getContext().getResources().getDrawable(R.drawable.livros_lidos);
 
             imgLivroLido.setImageDrawable(drawableLido);
 
         } else {
 
-            drawableLido = getContext().getResources().getDrawable(R.drawable.livros_lidos);
+            drawableLido = getContext().getResources().getDrawable(R.drawable.livros_lidos_click);
 
             imgLivroLido.setImageDrawable(drawableLido);
 
@@ -163,4 +178,26 @@ public class LivrosAdapter extends ArrayAdapter<Livro> {
         return view;
 
     }
+
+    public void alert(String titulo, String mensagem) {
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+        builder.setTitle(titulo);
+        builder.setMessage(mensagem);
+        builder.setCancelable(false);
+
+
+        builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    alerta.cancel();
+                }
+            });
+
+        alerta = builder.create();
+        alerta.show();
+
+    }
+
 }

@@ -59,9 +59,7 @@ public class EditarLivro extends AppCompatActivity {
         imgLivroCapa.setImageBitmap(Utils.toBitmap(livro.getCapa()));
         livroCapa = BitmapFactory.decodeByteArray(livro.getCapa(), 0, livro.getCapa().length);
         txtTitulo.setText(livro.getTitulo());
-//        txtDescricao.setText(livro.getDescricao());
-        status = livro.getStatus();
-        txtDescricao.setText(String.valueOf(livro.getStatus()));
+        txtDescricao.setText(livro.getDescricao());
 
 
     }
