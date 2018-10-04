@@ -3,48 +3,51 @@ package br.com.senaijandira.mybooks;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import br.com.senaijandira.mybooks.tabs.LivrosFragment;
-import br.com.senaijandira.mybooks.tabs.LivrosLerFragment;
-import br.com.senaijandira.mybooks.tabs.LivrosLidosFragment;
+import br.com.senaijandira.mybooks.adapterFragments.AbasAdapter;
+import br.com.senaijandira.mybooks.crud.CadastroActivity;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
+
+    AbasAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        AbasAdapter adapter = new AbasAdapter(getSupportFragmentManager());
+        adapter = new AbasAdapter(getSupportFragmentManager());
 
-        final ViewPager viewPager = findViewById(R.id.abasViewPager);
+        ViewPager viewPager = findViewById(R.id.abasViewPager);
         viewPager.setAdapter(adapter);
-
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-                viewPager.getAdapter().notifyDataSetChanged();
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
+        viewPager.addOnPageChangeListener(this);
 
         TabLayout tabLayout = findViewById(R.id.abas);
         tabLayout.setupWithViewPager(viewPager);
+
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+
+        Fragment fragment = adapter.getFragment(position);
+        if (fragment != null) {
+            fragment.onResume();
+        }
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
 
     }
 

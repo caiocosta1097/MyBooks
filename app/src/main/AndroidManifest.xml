@@ -16,8 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CadastroActivity" />
-        <activity android:name=".EditarLivro"></activity>
+        <activity android:name=".crud.CadastroActivity" />
+        <activity android:name=".crud.EditarLivro"></activity>
     </application>
 
 </manifest>

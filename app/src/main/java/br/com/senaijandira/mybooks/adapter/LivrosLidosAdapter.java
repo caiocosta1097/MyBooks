@@ -1,4 +1,4 @@
-package br.com.senaijandira.mybooks;
+package br.com.senaijandira.mybooks.adapter;
 
 
 import android.arch.persistence.room.Room;
@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import br.com.senaijandira.mybooks.R;
+import br.com.senaijandira.mybooks.db.Utils;
 import br.com.senaijandira.mybooks.db.MyBooksDatabase;
 import br.com.senaijandira.mybooks.model.Livro;
 

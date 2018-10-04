@@ -1,4 +1,4 @@
-package br.com.senaijandira.mybooks;
+package br.com.senaijandira.mybooks.crud;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -7,23 +7,30 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import java.io.InputStream;
 
+import br.com.senaijandira.mybooks.R;
+import br.com.senaijandira.mybooks.db.Utils;
 import br.com.senaijandira.mybooks.db.MyBooksDatabase;
 import br.com.senaijandira.mybooks.model.Livro;
 
-public class CadastroActivity extends AppCompatActivity {
+public class EditarLivro extends AppCompatActivity {
 
     Bitmap livroCapa;
+
     ImageView imgLivroCapa;
+
     EditText txtTitulo, txtDescricao;
+
     AlertDialog alerta;
+
+    int idLivro, status;
 
     InputStream input;
 
@@ -34,7 +41,7 @@ public class CadastroActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastro);
+        setContentView(R.layout.activity_editar_livro);
 
         // Criando a instância do banco de dados
         myBooksDatabase = Room.databaseBuilder(getApplicationContext(), MyBooksDatabase.class, Utils.DATABASE_NAME)
@@ -45,6 +52,18 @@ public class CadastroActivity extends AppCompatActivity {
         imgLivroCapa = findViewById(R.id.imgLivroCapa);
         txtTitulo = findViewById(R.id.txtTitulo);
         txtDescricao = findViewById(R.id.txtDescricao);
+
+        idLivro = getIntent().getIntExtra("livro", 0);
+
+        Livro livro = myBooksDatabase.livroDao().pegarLivro(idLivro);
+
+        imgLivroCapa.setImageBitmap(Utils.toBitmap(livro.getCapa()));
+        livroCapa = BitmapFactory.decodeByteArray(livro.getCapa(), 0, livro.getCapa().length);
+        txtTitulo.setText(livro.getTitulo());
+        txtDescricao.setText(livro.getDescricao());
+
+        status = livro.getStatus();
+
     }
 
     public void AbrirGaleria(View view) {
@@ -82,7 +101,7 @@ public class CadastroActivity extends AppCompatActivity {
 
     }
 
-    public void salvarLivro(View view) {
+    public void editarLivro(View view) {
 
         if (livroCapa == null){
 
@@ -96,19 +115,17 @@ public class CadastroActivity extends AppCompatActivity {
 
             String descricao = txtDescricao.getText().toString();
 
-            int status = 0;
-
             if (titulo.equals("") || descricao.equals("")) {
 
                 alert("Erro", "Preencha todos os campos", 1);
 
             } else {
 
-                alert("Sucesso", "Livro cadastrado com sucesso!", 0);
+                alert("Sucesso", "Livro atualizado com sucesso!", 0);
 
-                Livro livro = new Livro(0, capa, titulo, descricao, status);
+                Livro livro = new Livro(idLivro, capa, titulo, descricao, status);
 
-                myBooksDatabase.livroDao().inserir(livro);
+                myBooksDatabase.livroDao().atualizar(livro);
 
             }
 
@@ -148,5 +165,4 @@ public class CadastroActivity extends AppCompatActivity {
         alerta.show();
 
     }
-
 }
