@@ -12,7 +12,7 @@ import br.com.senaijandira.mybooks.adapterFragments.AbasAdapter;
 import br.com.senaijandira.mybooks.crud.CadastroActivity;
 
 
-public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
+public class MainActivity extends AppCompatActivity {
 
     AbasAdapter adapter;
 
@@ -25,29 +25,9 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
         ViewPager viewPager = findViewById(R.id.abasViewPager);
         viewPager.setAdapter(adapter);
-        viewPager.addOnPageChangeListener(this);
 
         TabLayout tabLayout = findViewById(R.id.abas);
         tabLayout.setupWithViewPager(viewPager);
-
-    }
-
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-    }
-
-    @Override
-    public void onPageSelected(int position) {
-
-        Fragment fragment = adapter.getFragment(position);
-        if (fragment != null) {
-            fragment.onResume();
-        }
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
 
     }
 

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -70,6 +71,8 @@ public class LivrosLerAdapter extends ArrayAdapter<Livro> {
 
                 addAll(livros);
 
+                Toast.makeText(getContext(), "Livro removido da lista", Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -89,6 +92,8 @@ public class LivrosLerAdapter extends ArrayAdapter<Livro> {
                 Livro[] livros = appDB.livroDao().selecionarLivrosLer();
 
                 addAll(livros);
+
+                Toast.makeText(getContext(), "Livro adicionado na lista de livros lidos", Toast.LENGTH_SHORT).show();
 
             }
         });

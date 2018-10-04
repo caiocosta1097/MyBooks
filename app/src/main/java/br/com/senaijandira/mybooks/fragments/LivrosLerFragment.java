@@ -24,22 +24,24 @@ public class LivrosLerFragment extends Fragment {
 
     MyBooksDatabase appDB;
 
-    Context mContext;
-
-    public LivrosLerFragment(){
-
-    }
-
-    public static LivrosLerFragment newIntance(){
-
-        return new LivrosLerFragment();
-
-    }
-
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+
+        try{
+
+            atualizar();
+
+        }catch (Exception e){
+
+            e.printStackTrace();
+
+        }
+
+        super.setUserVisibleHint(isVisibleToUser);
+
     }
+
+    public LivrosLerFragment(){ }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -66,14 +68,6 @@ public class LivrosLerFragment extends Fragment {
         super.onResume();
 
         atualizar();
-
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-        mContext = context;
 
     }
 

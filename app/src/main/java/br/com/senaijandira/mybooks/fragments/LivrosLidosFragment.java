@@ -24,21 +24,22 @@ public class LivrosLidosFragment extends Fragment {
 
     MyBooksDatabase appDB;
 
-    Context mContext;
-
-    public LivrosLidosFragment(){
-
-    }
-
-    public static LivrosLidosFragment newIntance(){
-
-        return new LivrosLidosFragment();
-
-    }
-
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+
+
+        try{
+
+            atualizar();
+
+        }catch (Exception e){
+
+            e.printStackTrace();
+
+        }
+
+        super.setUserVisibleHint(isVisibleToUser);
+
     }
 
     @Override
@@ -66,14 +67,6 @@ public class LivrosLidosFragment extends Fragment {
         super.onResume();
 
         atualizar();
-
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-
-        mContext = context;
 
     }
 

@@ -3,6 +3,7 @@ package br.com.senaijandira.mybooks.adapterFragments;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.ViewGroup;
 
 import java.util.HashMap;
@@ -12,17 +13,13 @@ import br.com.senaijandira.mybooks.fragments.LivrosFragment;
 import br.com.senaijandira.mybooks.fragments.LivrosLerFragment;
 import br.com.senaijandira.mybooks.fragments.LivrosLidosFragment;
 
-public class AbasAdapter  extends FragmentPagerAdapter{
+public class AbasAdapter  extends FragmentStatePagerAdapter{
 
     private static int NUM_ITEMS = 3;
-    private Map<Integer, String> mFragmentTags;
-    private FragmentManager mFragmentManager;
 
     public AbasAdapter(FragmentManager manager){
 
         super(manager);
-        mFragmentManager = manager;
-        mFragmentTags = new HashMap<Integer, String>();
 
     }
 
@@ -39,11 +36,11 @@ public class AbasAdapter  extends FragmentPagerAdapter{
         switch (position){
 
             case 0:
-                return LivrosFragment.newIntance();
+                return new LivrosFragment();
             case 1:
-                return LivrosLerFragment.newIntance();
+                return new LivrosLerFragment();
             case 2:
-                return LivrosLidosFragment.newIntance();
+                return new LivrosLidosFragment();
             default:
                 return null;
         }
@@ -64,33 +61,4 @@ public class AbasAdapter  extends FragmentPagerAdapter{
                 return null;
         }
     }
-
-    @Override
-    public Object instantiateItem(ViewGroup container, int position) {
-
-        Object object = super.instantiateItem(container, position);
-
-        if (object instanceof Fragment){
-
-            Fragment fragment = (Fragment) object;
-
-            String tag = fragment.getTag();
-
-            mFragmentTags.put(position, tag);
-
-        }
-
-        return object;
-
-    }
-
-    public Fragment getFragment(int position) {
-        Fragment fragment = null;
-        String tag = mFragmentTags.get(position);
-        if (tag != null) {
-            fragment = mFragmentManager.findFragmentByTag(tag);
-        }
-        return fragment;
-    }
-
 }
