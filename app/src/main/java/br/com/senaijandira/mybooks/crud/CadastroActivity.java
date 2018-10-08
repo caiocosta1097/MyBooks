@@ -128,7 +128,7 @@ public class CadastroActivity extends AppCompatActivity {
 
         if (tipoAlert == 1){
 
-            builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     alerta.cancel();
@@ -137,7 +137,7 @@ public class CadastroActivity extends AppCompatActivity {
 
         } else {
 
-            builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     finish();

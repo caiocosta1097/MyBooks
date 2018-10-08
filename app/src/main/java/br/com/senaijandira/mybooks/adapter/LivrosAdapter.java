@@ -198,7 +198,7 @@ public class LivrosAdapter extends ArrayAdapter<Livro> {
         builder.setCancelable(false);
 
 
-        builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     alerta.cancel();
