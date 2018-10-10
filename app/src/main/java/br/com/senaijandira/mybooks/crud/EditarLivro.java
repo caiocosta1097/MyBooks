@@ -16,7 +16,7 @@ import android.widget.ImageView;
 import java.io.InputStream;
 
 import br.com.senaijandira.mybooks.R;
-import br.com.senaijandira.mybooks.db.Utils;
+import br.com.senaijandira.mybooks.model.Utils;
 import br.com.senaijandira.mybooks.db.MyBooksDatabase;
 import br.com.senaijandira.mybooks.model.Livro;
 

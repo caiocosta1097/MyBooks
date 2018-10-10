@@ -10,7 +10,7 @@ import android.widget.ListView;
 
 import br.com.senaijandira.mybooks.adapter.LivrosAdapter;
 import br.com.senaijandira.mybooks.R;
-import br.com.senaijandira.mybooks.db.Utils;
+import br.com.senaijandira.mybooks.model.Utils;
 import br.com.senaijandira.mybooks.db.MyBooksDatabase;
 import br.com.senaijandira.mybooks.model.Livro;
 
