@@ -4,23 +4,27 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
+// Declara a classe como uma entidade no banco de dados
 @Entity
 public class Livro {
 
+    // Define a chave primária
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-    //A imagem de capa é um array de bytes
+    // A imagem de capa será um array de bytes
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
     private byte[] capa;
 
-
+    // Define os atributos
     private String titulo;
     private String descricao;
     private int status;
 
+    // Construtor da classe
     public Livro(){}
 
+    // Método para criar um livro
     public Livro(int id, byte[] capa, String titulo, String descricao, int status){
         this.id= id;
         this.capa = capa;
@@ -29,6 +33,7 @@ public class Livro {
         this.status = status;
     }
 
+    // Métodos GET e SET da classe
     public int getId() {
         return id;
     }

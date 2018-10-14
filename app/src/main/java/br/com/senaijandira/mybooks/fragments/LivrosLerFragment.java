@@ -16,14 +16,56 @@ import br.com.senaijandira.mybooks.model.Livro;
 
 public class LivrosLerFragment extends Fragment {
 
+    // Inicializando o ListView
     ListView listViewLivros;
 
+    // Inicializando o LivrosAdapter
     LivrosLerAdapter adapter;
 
+    // Inicializando o banco de dados
     MyBooksDatabase appDB;
 
+    // Método para criar uma view
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        // View que recebe o xml da fragment
+        View view = inflater.inflate(R.layout.fragment_livros_ler, container, false);
+
+        // Conectabdo com o banco de dados
+        appDB = Room.databaseBuilder(getContext(), MyBooksDatabase.class, Utils.DATABASE_NAME)
+                .fallbackToDestructiveMigration()
+                .allowMainThreadQueries()
+                .build();
+
+        // Pegando o id no xml
+        listViewLivros = view.findViewById(R.id.listViewLivros);
+
+        // Instânciando o adapter do ListView
+        adapter = new LivrosLerAdapter(getContext());
+
+        // ListView recebendo o adapter
+        listViewLivros.setAdapter(adapter);
+
+        // Retornando a view
+        return view;
+
+    }
+
+    // Chamando o método atualizar no onResume
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        atualizar();
+
+    }
+
+    // Método para atualizar a fragment toda vez que ficar visível
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
+
+        super.setUserVisibleHint(isVisibleToUser);
 
         try{
 
@@ -35,46 +77,18 @@ public class LivrosLerFragment extends Fragment {
 
         }
 
-        super.setUserVisibleHint(isVisibleToUser);
-
     }
 
-    public LivrosLerFragment(){ }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.fragment_livros_ler, container, false);
-
-        appDB = Room.databaseBuilder(getContext(), MyBooksDatabase.class, Utils.DATABASE_NAME)
-                .fallbackToDestructiveMigration()
-                .allowMainThreadQueries()
-                .build();
-
-        listViewLivros = view.findViewById(R.id.listViewLivros);
-
-        adapter = new LivrosLerAdapter(getContext());
-
-        listViewLivros.setAdapter(adapter);
-
-        return view;
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        atualizar();
-
-    }
-
+    // Método para atualizar a fragment
     public void atualizar(){
 
+        // Limpa o adapter
         adapter.clear();
 
+        // Seleciona os livros novamente
         Livro[] livros = appDB.livroDao().selecionarLivrosLer();
 
+        // Exibe de novo
         adapter.addAll(livros);
 
     }

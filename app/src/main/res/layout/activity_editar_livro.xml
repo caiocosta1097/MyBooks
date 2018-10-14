@@ -74,7 +74,8 @@
             android:background="@drawable/meu_botao"
             android:textColor="#fff"
             android:textStyle="bold"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:onClick="editarLivro"/>
 
     </LinearLayout>
 

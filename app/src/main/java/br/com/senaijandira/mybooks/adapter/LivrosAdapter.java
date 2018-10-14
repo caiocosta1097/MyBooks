@@ -111,9 +111,9 @@ public class LivrosAdapter extends ArrayAdapter<Livro> {
                 Intent intent = new Intent(getContext(), EditarLivro.class);
 
                 // Enviando o valor do id do livro selecionado pelo intent
-                intent.putExtra("livro", livro.getId());
+                intent.putExtra("idLivro", livro.getId());
 
-                // Chamando a activity
+                // Abrindo a activity de editar
                 getContext().startActivity(intent);
 
             }

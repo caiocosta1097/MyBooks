@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     // Método para abrir a tela de  cadastro
     public void abrirCadastro(View view){
 
+        // Abrindo a activity de cadastro
         startActivity(new Intent(this, CadastroActivity.class));
 
     }

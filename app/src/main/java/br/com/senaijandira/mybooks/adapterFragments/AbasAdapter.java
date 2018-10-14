@@ -3,26 +3,24 @@ package br.com.senaijandira.mybooks.adapterFragments;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.view.ViewGroup;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import br.com.senaijandira.mybooks.fragments.LivrosFragment;
 import br.com.senaijandira.mybooks.fragments.LivrosLerFragment;
 import br.com.senaijandira.mybooks.fragments.LivrosLidosFragment;
 
-public class AbasAdapter  extends FragmentStatePagerAdapter{
+public class AbasAdapter  extends FragmentPagerAdapter{
 
+    // Varíável estática que recebe o número de fragments
     private static int NUM_ITEMS = 3;
 
+    // Construtor da classe
     public AbasAdapter(FragmentManager manager){
 
         super(manager);
 
     }
 
+    // Método que retorna a quantidade de fragments
     @Override
     public int getCount() {
 
@@ -30,6 +28,7 @@ public class AbasAdapter  extends FragmentStatePagerAdapter{
 
     }
 
+    // Método que retorna as fragments a partir da posição
     @Override
     public Fragment getItem(int position) {
 
@@ -46,6 +45,7 @@ public class AbasAdapter  extends FragmentStatePagerAdapter{
         }
     }
 
+    // Método que retorna os títulos das fragments a partir da posição
     @Override
     public CharSequence getPageTitle(int position) {
 
